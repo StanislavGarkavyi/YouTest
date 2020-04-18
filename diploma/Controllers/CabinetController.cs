@@ -113,6 +113,17 @@ namespace diploma.Controllers
         //    ViewBag.val = marks;
         //    return PartialView(diagramModel);
         //}
+        public ActionResult putMoney() {
+            var user = db.Users.Find(User.Identity.GetUserId());
+            return View(user);
+        }
+        public bool putBalance(double sum) {            
+            var user = db.Users.Find(User.Identity.GetUserId());
+            user.Balance = user.Balance + sum;
+            user.BalanceHistories.Add(new BalanceHistory() { Date = DateTime.Now, Sum = sum, User = user, Comment = "Пополнение счета" });
+            db.SaveChanges();
+            return true;
+        }
         public int getMark(DateTime date)
         {
             var user = User.Identity.GetUserId();

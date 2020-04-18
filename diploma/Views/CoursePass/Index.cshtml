@@ -6,16 +6,16 @@
     </div>
 <div id="mode">
     <div class="row text-center" style="margin-bottom: 25px;">
-        <div class="col-md-2 btn btn-default" onclick="mode()">На весь экран</div>
-        <div class="col-md-8 " style="padding:5px; font-size:30px; border:1px solid gray; border-radius: 0px 0px 20px 20px;">@Model.Course.Name <br /> @Model.Name</div>
+        <div class="col-md-2 btn btn-default" id="fullScreen" onclick="mode()">На весь экран</div>
+        <div class="col-md-8 " style="padding: 5px;font-size: 20px;border: 1px solid #dedede;border-radius: 0px 0px 20px 20px;">@Model.Course.Name <br /> @Model.Name</div>
         @if (Model.Question.Count != 0)
         {
-            @Html.ActionLink("Пройти тестовое задание", "TestPass", "CoursePass", new { LessonId = Model.Id }, new { @class = "col-md-2 btn btn-default" });
+            @Html.ActionLink("Пройти тестовое задание", "TestPass", "CoursePass", new { LessonId = Model.Id }, new { @class = "col-md-2 btn btn-default", @id="testPass" });
             
         }
         else
         {
-            <button class="col-md-2 btn btn-default" disabled>Пройти тестовое задание</button>
+            <button id="testPass" class="col-md-2 btn btn-default" disabled>Пройти тестовое задание</button>
         }
 
     </div>
@@ -30,7 +30,7 @@
         </div>*@
 
 
-    <div style=" position: fixed;left: 2vh; top: 60px; padding: 10px;" onclick="fun()">
+    <div style=" position: fixed; left: 2vh; top: 60px; padding: 10px;" onclick="fun()">
         <h1 id="menu" style="font-size:2vh; white-space: nowrap; overflow: hidden;text-overflow: ellipsis; width:30vh;" title="@Model.Course.Name">Меню</h1>
         <ol id="lessons" style="display:none; height:80vh; border: 2px solid black; border-radius:2vh; width:30vh;margin:20px; background-color:white">
             @foreach (var lesson in Model.Course.Lessons.OrderBy(p => p.Id))
@@ -70,6 +70,12 @@
 <style>
     #menu:hover {
         font-size: 2.2vh !important;
+    }
+    #fullScreen {
+        border-radius: 0px 0px 0px 10px;
+    }
+    #testPass {
+        border-radius: 0px 0px 10px 0px;
     }
 </style>
 <script>

@@ -229,9 +229,26 @@
     <Compile Include="Migrations\202004181730063_Mig_1.0.Designer.cs">
       <DependentUpon>202004181730063_Mig_1.0.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004182029055_Mig_1.1.cs" />
+    <Compile Include="Migrations\202004182029055_Mig_1.1.Designer.cs">
+      <DependentUpon>202004182029055_Mig_1.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004182059459_Mig_1.2.cs" />
+    <Compile Include="Migrations\202004182059459_Mig_1.2.Designer.cs">
+      <DependentUpon>202004182059459_Mig_1.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004182119309_Mig_1.3.cs" />
+    <Compile Include="Migrations\202004182119309_Mig_1.3.Designer.cs">
+      <DependentUpon>202004182119309_Mig_1.3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004182216281_Mig_1.4.cs" />
+    <Compile Include="Migrations\202004182216281_Mig_1.4.Designer.cs">
+      <DependentUpon>202004182216281_Mig_1.4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\BalanceHistory.cs" />
     <Compile Include="Models\Cathegory.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -333,6 +350,7 @@
     <Content Include="Views\Cabinet\TestReport2.cshtml" />
     <Content Include="Views\Cabinet\TestReport3.cshtml" />
     <Content Include="Views\Cabinet\Diagram.cshtml" />
+    <Content Include="Views\Cabinet\putMoney.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,6 +371,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202004181730063_Mig_1.0.resx">
       <DependentUpon>202004181730063_Mig_1.0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004182029055_Mig_1.1.resx">
+      <DependentUpon>202004182029055_Mig_1.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004182059459_Mig_1.2.resx">
+      <DependentUpon>202004182059459_Mig_1.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004182119309_Mig_1.3.resx">
+      <DependentUpon>202004182119309_Mig_1.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004182216281_Mig_1.4.resx">
+      <DependentUpon>202004182216281_Mig_1.4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

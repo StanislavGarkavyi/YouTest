@@ -11,8 +11,10 @@ namespace diploma.Models
     public class ApplicationUser : IdentityUser
     {
         public string Img { get; set; }
+        public double Balance { get; set; }
         public virtual List<UserCourses> UserCourses { get; set; }
         public virtual List<UserAnswer> UserAnswers { get; set; }
+        public virtual List<BalanceHistory> BalanceHistories { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Обратите внимание, что authenticationType должен совпадать с типом, определенным в CookieAuthenticationOptions.AuthenticationType
@@ -24,6 +26,7 @@ namespace diploma.Models
         {
             UserCourses = new List<UserCourses>();
             UserAnswers = new List<UserAnswer>();
+            BalanceHistories = new List<BalanceHistory>();
         }
     }
 
@@ -36,6 +39,7 @@ namespace diploma.Models
         public DbSet<UserAnswer> UserAnswers { get; set; }
         public DbSet<Cathegory> Cathegories { get; set; }
         public DbSet<UserCourses> UserCourses { get; set; }
+        public DbSet<BalanceHistory> balanceHistories { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

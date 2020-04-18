@@ -11,6 +11,13 @@
         margin-top: 30px;
         margin-bottom: 50px;
     }
+    b{
+        font-size:15px;
+        font-weight:100;
+    }
+    .descr{
+        margin-top: 100px;
+    }
 </style>
 
 
@@ -25,9 +32,10 @@
         <img src="@Url.Content(Model.CourseImg)" alt="..." class="img-circle" style='width:140px; height:140px;'>
 
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 descr">
 
-        <h4 class="col-md-8"><strong>Описание:</strong><br><br>@Model.Description</h4>
+        <h4 class="col-md-8"><strong>Описание:</strong><br><br><b>@Model.Description</b></h4>
+        <h4 class="col-md-8"><strong>Стоимость:</strong>  @Model.Price грн</h4>
 
 
 

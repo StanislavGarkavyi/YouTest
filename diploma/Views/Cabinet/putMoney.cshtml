@@ -1,0 +1,136 @@
+﻿<style>
+    .top20 {
+        margin-top: 20px;
+    }
+
+    #header {
+        float: right
+    }
+
+    input[type=text] {
+        margin: 50px 0px;
+        height: 50px;
+        width: 100%;
+        padding: 0px 20px;
+        border: 1px solid #dddddd;
+        border-radius: 50px 0px 0px 50px;
+        font-size: 15px;
+    }
+
+    button[type=button] {
+        position: relative;
+        top: -1px;
+        height: 50px;
+        width: 150px;
+        border: 1px solid #dddddd;
+        color: #2a2a2aa6;
+        border-radius: 0px 50px 50px 0px;
+    }
+    #upload-succesed-popup {
+        display: none;
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        width: 450px;
+        height: 60px;
+        background-color: white;
+        color: white;
+        border: 1px solid #8dd98d;
+        border-radius: 100px;
+    }
+
+        #upload-succesed-popup h3, #upload-succesed-popup h5 {
+            display: inline-block;
+            font-family: sans-serif;
+            font-size: 25px;
+        }
+
+        #upload-succesed-popup h5 {
+            margin: 15px 0px 0px 55px;
+            color: #8dd98d;
+        }
+
+        #upload-succesed-popup h3 {
+            position: relative;
+            top: -1px;
+            float: right;
+            margin: 0px;
+            padding: 0px;
+            width: 60px;
+            height: 60px;
+            background-color: #8dd98d;
+            text-align: center;
+            padding-top: 15px;
+            border-radius: 100px
+        }
+</style>
+@using diploma.Models
+@model ApplicationUser
+@{ViewBag.Title = "Пополнение счета";}
+<div class="row top20">
+    @if (Model.Img == null)
+    {
+        <div class="col-md-2 text-center">
+            <img src="~/img/defaultlogo.jpg" class="img-circle" style="width:150px; height:150px;">
+            <h6>@Model.Email</h6>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-2 text-center">
+            <img src="@Model.Img" class="img-circle" style="width:150px; height:150px;">
+            <h6>@Model.Email</h6>
+        </div>
+    }
+
+<div class="col-md-9 col-md-offset-1 top20">
+    <span id="header">Сейчас на вашем счету: @Model.Balance</span>
+    <div>
+        <input autocomplete="off" pattern="[0-9]" id="sum" type="text" placeholder="Введите сумму" /><button id="submitTransaction" type="button">Пополнить счет</button>
+    </div>
+
+    <table class="table">
+        <caption style="text-align:center">История кошелька</caption>
+        <thead>
+            <tr>
+                <th>Сумма</th>
+                <th>Дата</th>
+                <th>Комментарий</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.BalanceHistories)
+            {
+            <tr>
+                <td>
+                    @item.Sum
+                </td>
+                <td>
+                    @item.Date
+                </td>
+                <td>
+                    @item.Comment
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</div>
+<div id="upload-succesed-popup">
+    <h3><span class="glyphicon glyphicon-ok"></span> </h3>
+    <h5>Пополнение успешно</h5>
+</div>
+<script>
+    document.getElementById("submitTransaction").addEventListener('click', function () {       
+        $.ajax({
+            type: "POST",
+            url: '/Cabinet/putBalance?sum=' + document.getElementById("sum").value,
+            contentType: false,
+            processData: false,
+            success: function (result) { $('#upload-succesed-popup').fadeIn(1000); setTimeout(function () { window.location.reload(); } , 3000); },
+            error: function (result) { alert("что-то пощл не так!!!"); }
+        });
+    }, false);
+</script>
+

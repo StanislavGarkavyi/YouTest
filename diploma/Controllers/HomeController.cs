@@ -66,6 +66,12 @@ namespace diploma.Controllers
         {
             var Course = db.Courses.Where(p => p.Lessons.FirstOrDefault().Id == lessonid).FirstOrDefault();
             var user = db.Users.Find(User.Identity.GetUserId());
+            //снятие денег
+            if (db.balanceHistories.Where(p => p.User.Id == user.Id & p.Course.Id == Course.Id).FirstOrDefault() == null) {
+                db.balanceHistories.Add(new BalanceHistory() { Course = Course, User = user, Date = DateTime.Now, Sum = -(Course.Price), Comment = "Оплата курса " + Course.Name });
+                user.Balance -= Course.Price;
+                db.SaveChanges();
+            }
             var test = db.UserCourses.Where(p => p.Course.Id == Course.Id & p.User.Id == user.Id).FirstOrDefault();
             if (test == null)
             {

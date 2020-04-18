@@ -2,6 +2,17 @@
     .top20 {
         margin-top: 20px;
     }
+    #balance {
+        position: fixed;
+        width: 200px;
+        height: 25px;
+        top: 50px;
+        right: -50px;
+        padding: 0px 20px;
+        border: 1px solid #dddddd;
+        border-radius: 0px 0px 0px 5px;
+        color: #333333;
+    }
 </style>
 @using diploma.Models
 @model ApplicationUser
@@ -53,6 +64,7 @@
             </div>
         </div>
     </div>
+    <div id="balance">Счёт: @Model.Balance</div>
 
 </div>
 <div class="text-right"><div class="btn btn-default">@Html.ActionLink( "Создать курс", "Index", "CourseCreate")</div></div>

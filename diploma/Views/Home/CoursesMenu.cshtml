@@ -1,0 +1,264 @@
+﻿<style>
+    .top_buffer1 {
+        margin-top: 30px;
+    }
+
+    .bot_buffer2 {
+        margin-bottom: 10px;
+    }
+
+    .bot_buffer1 {
+        margin-top: 30px;
+        margin-bottom: 50px;
+    }
+
+    .text {
+        display: block;
+        width: 330px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
+@using diploma.Models;
+@model List<Cathegory>
+<form method="post">
+    <div class="row col-md-offset-2 text-center top_buffer1">
+        <div class="navbar-form navbar-left" role="search">
+            <input type="text" class="form-control" placeholder="Search" name="Search">
+            <input type="submit" class="btn btn-default" id="button" name="button" value="Искать" />
+
+            @Html.RadioButton("radio", "name", true)
+            <span>по имени</span>
+            @Html.RadioButton("radio", "desc")
+            <span>по описанию</span>
+        </div>
+    </div>
+    <div class="row">
+        @if (ViewBag.Search != null)
+        {
+
+            if (ViewBag.Cathegory != null)
+            {
+                if (ViewBag.radio == "name")
+                {
+                    //поиск по имени и категории
+                    int counter = 0;
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        for (int j = 0; j < Model[i].Courses.Count; j++)
+                        {
+                            if (Model[i].Courses[j].Name.Contains(ViewBag.Search) && Model[i].Courses[j].Cathegory.Name == ViewBag.Cathegory)
+                            {
+                                counter++;
+                                <div class="col-md-4  panel panel-default   top_buffer1">
+                                    <div class="panel-body">
+                                        <div class="text-center">
+
+                                            <img src="@Url.Content(Model[i].Courses[j].CourseImg)" alt="..." class="img-circle" style='width:200px; height:200px;'>
+                                        </div>
+                                        <div class="panel-body text" name="TestName"></div>
+                                        <h3 class="text" title="@Model[i].Courses[j].Name"> @Model[i].Courses[j].Name</h3>
+                                        <h4 class="text" title="@Model[i].Courses[j].Description">@Model[i].Courses[j].Description .</h4>
+                                        <h5 title="@Model[i].Courses[j].Cathegory.Name"> @Html.ActionLink(Model[i].Courses[j].Cathegory.Name, "CoursesMenu", new { cathegory = Model[i].Name })</h5>
+
+                                        @if (ViewBag.userid == Model[i].Courses[j].CretorId)
+                                        {
+                                            <div class="btn btn-default  col-md-10 "> @Html.ActionLink("Пройти", "CourseProfile", new { CourseId = Model[i].Courses[j].Id })</div>
+                                            <div class="btn btn-defa@ult  col-md-2 "> @Html.ActionLink("Ред", "Index", "CourseCreate",  new { CourseId = Model[i].Courses[j].Id.ToString()}, new { })</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="btn btn-default  col-md-12 "> @Html.ActionLink("Пройти", "CourseProfile", new { CourseId = Model[i].Courses[j].Id })</div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    if (counter == 0)
+                    {
+                        <div class="col-md-12 text-center">
+                            <h2>Курсов не найдено</h2>
+                        </div>
+                    }
+                }
+                if (ViewBag.radio == "desc")
+                {
+                    int counter = 0;
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        for (int j = 0; j < Model[i].Courses.Count; j++)
+                        {
+                            if (Model[i].Courses[j].Description.Contains(ViewBag.Search) && Model[i].Courses[j].Cathegory.Name == ViewBag.Cathegory)
+                            {
+                                counter++;
+                                <div class="col-md-4  panel panel-default  top_buffer1">
+                                    <div class="panel-body">
+                                        <div class="text-center">
+
+                                            <img src="@Url.Content(Model[i].Courses[j].CourseImg)" alt="..." class="img-circle" style='width:200px; height:200px;'>
+                                        </div>
+                                        <div class="panel-body text" name="TestName"></div>
+                                        <h3 class="text" title="@Model[i].Courses[j].Name"> @Model[i].Courses[j].Name</h3>
+                                        <h4 class="text" title="@Model[i].Courses[j].Description">@Model[i].Courses[j].Description .</h4>
+                                        <h5> @Html.ActionLink(Model[i].Name, "CoursesMenu", new { cathegory = Model[i].Name })</h5>
+
+                                        @if (ViewBag.userid == Model[i].Courses[j].CretorId)
+                                        {
+                                            <div class="btn btn-default  col-md-10 "> @Html.ActionLink("Пройти", "CourseProfile", new { CourseId = Model[i].Courses[j].Id })</div>
+                                            <div class="btn btn-default  col-md-2 "> @Html.ActionLink("Ред", "Index", "CourseCreate",  new { CourseId = Model[i].Courses[j].Id.ToString()}, new { })</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="btn btn-default  col-md-12 "> @Html.ActionLink("Пройти", "CourseProfile", new { CourseId = Model[i].Courses[j].Id })</div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    if (counter == 0)
+                    {
+                        <div class="col-md-12 text-center">
+                            <h2>Курсов не найдено</h2>
+                        </div>
+                    }
+                }
+
+            }
+            else
+            {
+                if (ViewBag.radio == "name")
+                {
+                    //поиск по имени
+                    int counter = 0;
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        for (int j = 0; j < Model[i].Courses.Count; j++)
+                        {
+                            if (Model[i].Courses[j].Name.Contains(ViewBag.Search))
+                            {
+                                counter++;
+                                <div class="col-md-4  panel panel-default top_buffer1">
+                                    <div class="panel-body">
+                                        <div class="text-center">
+
+                                            <img src="@Url.Content(Model[i].Courses[j].CourseImg)" alt="..." class="img-circle" style='width:200px; height:200px;'>
+                                        </div>
+                                        <div class="panel-body text" name="TestName"></div>
+                                        <h3 class="text" title="@Model[i].Courses[j].Name"> @Model[i].Courses[j].Name</h3>
+                                        <h4 class="text" title="@Model[i].Courses[j].Description">@Model[i].Courses[j].Description .</h4>
+                                        <h5> @Html.ActionLink(Model[i].Name, "CoursesMenu", new { cathegory = Model[i].Name })</h5>
+
+                                        @if (ViewBag.userid == Model[i].Courses[j].CretorId)
+                                        {
+                                            <div class="btn btn-default  col-md-10 "> @Html.ActionLink("Пройти", "CourseProfile", new { CourseId = Model[i].Courses[j].Id })</div>
+                                            <div class="btn btn-default  col-md-2 "> @Html.ActionLink("Ред", "Index", "CourseCreate",  new { CourseId = Model[i].Courses[j].Id.ToString()}, new { })</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="btn btn-default  col-md-12 "> @Html.ActionLink("Пройти", "CourseProfile", new { CourseId = Model[i].Courses[j].Id })</div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    if (counter == 0)
+                    {
+                        <div class="col-md-12 text-center">
+                            <h2>Курсов не найдено</h2>
+                        </div>
+                    }
+                }
+                if (ViewBag.radio == "desc")
+                {
+                    int counter = 0;
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        for (int j = 0; j < Model[i].Courses.Count; j++)
+                        {
+                            if (Model[i].Courses[j].Description.Contains(ViewBag.Search))
+                            {
+                                counter++;
+                                <div class="col-md-4  panel panel-default  top_buffer1">
+                                    <div class="panel-body">
+                                        <div class="text-center">
+
+                                            <img src="@Url.Content(Model[i].Courses[j].CourseImg)" alt="..." class="img-circle" style='width:200px; height:200px;'>
+                                        </div>
+                                        <div class="panel-body text" name="TestName"></div>
+                                        <h3 class="text" title="@Model[i].Courses[j].Name"> @Model[i].Courses[j].Name</h3>
+                                        <h4 class="text" title="@Model[i].Courses[j].Description">@Model[i].Courses[j].Description .</h4>
+                                        <h5> @Html.ActionLink(Model[i].Name, "CoursesMenu", new { cathegory = Model[i].Name })</h5>
+
+                                        @if (ViewBag.userid == Model[i].Courses[j].CretorId)
+                                        {
+                                            <div class="btn btn-default  col-md-10 "> @Html.ActionLink("Пройти", "CourseProfile", new { CourseId = Model[i].Courses[j].Id })</div>
+                                            <div class="btn btn-default  col-md-2 "> @Html.ActionLink("Ред", "Index", "CourseCreate",  new { CourseId = Model[i].Courses[j].Id.ToString()}, new { })</div>
+                                        }
+                                        else
+                                        {
+                                            <div class="btn btn-default  col-md-12 "> @Html.ActionLink("Пройти", "CourseProfile", new { CourseId = Model[i].Courses[j].Id })</div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    if (counter == 0)
+                    {
+                        <div class="col-md-12 text-center">
+                            <h2>Курсов не найдено</h2>
+                        </div>
+                    }
+                }
+
+
+            }
+
+
+
+        }
+        else
+        {
+            if (Model.Count() <= 0)
+            {
+                <div class="col-md-12 text-center">
+                    <h2>Курсов не найдено</h2>
+                </div>
+            }
+
+            for (int i = 0; i < Model.Count; i++)
+            {
+                for (int j = 0; j < Model[i].Courses.Count; j++)
+                {
+                    <div class="col-md-4  panel panel-default top_buffer1">
+                        <div class="panel-body">
+                            <div class="text-center">
+
+                                <img src="@Url.Content(Model[i].Courses[j].CourseImg)" alt="..." class="img-circle" style='width:200px; height:200px;'>
+                            </div>
+                            <div class="panel-body text" name="TestName"></div>
+                            <h3 class="text" title=" @Model[i].Courses[j].Name"> @Model[i].Courses[j].Name</h3>
+                            <h4 class="text" title="@Model[i].Courses[j].Description">@Model[i].Courses[j].Description .</h4>
+                            <h5> @Html.ActionLink(Model[i].Name, "CoursesMenu", new { cathegory = Model[i].Name })</h5>
+
+                            @if (ViewBag.userid == Model[i].Courses[j].CretorId)
+                            {
+                                <div class="btn btn-default  col-md-10 "> @Html.ActionLink("Пройти", "CourseProfile", new { CourseId = Model[i].Courses[j].Id })</div>
+                                <div class="btn btn-default  col-md-2 "> @Html.ActionLink("Ред", "Index", "CourseCreate",  new { CourseId = Model[i].Courses[j].Id.ToString()}, new { })</div>
+                            }
+                            else
+                            {
+                                <div class="btn btn-default  col-md-12 "> @Html.ActionLink("Пройти", "CourseProfile", new { CourseId = Model[i].Courses[j].Id })</div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        }
+
+    </div>
+</form>

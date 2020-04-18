@@ -1,0 +1,40 @@
+﻿@using diploma.Models
+@model List<lessonsReport>
+<h1>Оценка: @ViewBag.Mark</h1>    
+<div class="text-left">
+    @foreach (var item in Model)
+    {
+        <strong>@item.QuestionText</strong><br />
+        for (int i = 0; i < item.answersReports.Count; i++)
+        {
+            //green
+            if (item.answersReports[i].answer)
+            {
+                if (item.answersReports[i].userAnswer) //checked
+                {
+                    @Html.CheckBox("correct", true)
+                    <font color="green">@item.answersReports[i].answerText</font> <br />
+                }
+                else
+                {
+                    @Html.CheckBox("correct", false)
+                    <font color="green">@item.answersReports[i].answerText</font> <br />
+                }
+            }
+            else     //red
+            {
+                if (item.answersReports[i].userAnswer) //checked
+                {
+                    @Html.CheckBox("correct", true)
+                    <font color="red">@item.answersReports[i].answerText</font> <br />
+                }
+                else
+                {
+                    @Html.CheckBox("correct", false)
+                    <font color="red">@item.answersReports[i].answerText</font> <br />
+                }
+            }
+
+        }
+    }
+</div>

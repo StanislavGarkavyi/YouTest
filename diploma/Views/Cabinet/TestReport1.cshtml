@@ -1,0 +1,27 @@
+﻿@using diploma.Models
+@model List<TestReport1>
+
+<div class="row top_buffer1">
+    <div class="col-md-2">
+        <img src="@ViewBag.img" alt="@ViewBag.name" class="img-circle" style='width:150px; height:150px;' />
+        
+    </div>
+    <div class="col-md-10 text-center"><h2>@ViewBag.name</h2><h4>@ViewBag.desc</h4></div>   
+</div>
+<div class="row top_buffer1">
+    <ul class="col-md-2 nav nav-pills nav-stacked text-center">
+        @foreach (var item in Model)
+        {
+            <li>
+               @Ajax.ActionLink(item.Name, "TestReport2", new { LessonId =item.Id}, new AjaxOptions { UpdateTargetId = "TestReport2" })
+            </li>
+        }
+    </ul> 
+    <div id="TestReport2" class="col-md-10"></div>
+</div>
+
+<style>
+    .top_buffer1 {
+        margin-top: 30px;
+    }
+</style>

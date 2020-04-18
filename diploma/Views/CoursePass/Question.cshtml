@@ -1,0 +1,57 @@
+﻿@using diploma.Models
+@model Question
+<div id="Thanks"></div>
+<div class="container">
+    @using (Ajax.BeginForm("SaveAnswer", new AjaxOptions { UpdateTargetId = "Thanks" }))
+    {
+        <input type="hidden" value="@Model.Id" name="QuestionId" />
+        <input type="hidden" value="@ViewBag.date" name="Date" />
+        <h2 class="row"> @Model.Name</h2>
+        if (Model.Image != null&&Model.Image!="")
+        {
+            <img src="@Model.Image" alt="@Model.Name" style='width:200px; height:200px;' />
+        }
+        for (int i = 0; i < Model.Answers.Count; i++)
+        {
+            if (ViewBag.answer.Count!=0)
+            {
+                <div class="input-group">
+                    @if (ViewBag.answer[i].UsersAnswer)
+                    {
+                        <span class="input-group-addon">
+                            <input type="checkbox" value="true" name=@String.Concat("checkbox", i) checked>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="input-group-addon">
+                            <input type="checkbox" value="true" name=@String.Concat("checkbox", i)>
+                        </span>
+                    }
+
+
+                    <span class="form-control">
+                        @Model.Answers[i].Name
+                    </span>
+                </div>
+            }
+            else
+            {
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" value="true" name=@String.Concat("checkbox", i)>
+                    </span>
+                    <span class="form-control">
+                        @Model.Answers[i].Name
+                    </span>
+                </div>
+
+            }
+        }
+        <div class="row col-md-offset-8" style="margin-top:25px;">
+            <input type="submit" class="btn btn-primary top_buffer1 " name="button" value="Сохранить ответ" />
+        </div>
+
+    }
+
+</div>

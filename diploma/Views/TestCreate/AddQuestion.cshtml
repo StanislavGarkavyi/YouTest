@@ -1,0 +1,114 @@
+﻿<style>
+    .top_buffer1 {
+        margin-top: 30px;
+    }
+
+    .bot_buffer2 {
+        margin-bottom: 10px;
+    }
+</style>
+@using diploma.Models
+@model List<Answer>
+@*пришел необходимый вопрос*@
+@if (Model == null)
+{
+
+    using (Ajax.BeginForm("Result", "TestCreate", new AjaxOptions { UpdateTargetId = "Thanks" }, new { enctype = "multipart/form-data" }))
+    {
+
+        <div id="Thanks" class="top_buffer1"></div>
+        <input type="hidden" value="@ViewBag.LessonId" name="LessonsId" />
+        <input type="hidden" value="@ViewBag.QuestionCount" name="QuestionCount" />
+        <input type="hidden" value="false" name="Update" />
+        <div class="col-md-8. col-lg-offset-3 top_buffer">
+            <div class="form-group">
+                <textarea class="form-control top_buffer" id="Question" name="Question" rows="3" placeholder="Введите вопрос"></textarea>
+                <label for="QuestionImg">Добавьте изображение</label>
+                <input type="file" class="form-control-file bot_buffer2 " id="QuestionImg" name="QuestionImg">
+            </div>
+            @for (int i = 0; i < 5; i++)
+            {
+                <div class="input-group top_buffer ">
+                    <span class="input-group-addon">
+                        Ответ @(i + 1)
+                    </span>
+                    <span class="input-group-addon">
+                        Верно?
+                    </span> <span class="input-group-addon">
+                        <input type="checkbox" value="true" name=@String.Concat("checkbox", i)>
+                    </span>
+                    <input type="text" class="form-control" name=answer />
+                </div>
+
+            }
+        </div>
+
+        <input type="submit" class="btn btn-primary top_buffer1 col-md-offset-7" name="button" value="Сохранить вопрос" />
+        <input type="submit" class="btn btn-default top_buffer1 " name="button" value="Удалить вопрос" />
+
+
+    }
+
+}
+else
+{
+
+    using (Ajax.BeginForm("Result", "TestCreate", new AjaxOptions { UpdateTargetId = "Thanks" }, new { enctype = "multipart/form-data" }))
+    {
+
+        <div id="Thanks" class="top_buffer1"></div>
+        <input type="hidden" value="@ViewBag.LessonId" name="LessonsId" />
+        <input type="hidden" value="@ViewBag.QuestionCount" name="QuestionCount" />
+        <input type="hidden" value="@ViewBag.PreviousQuestion" name="PreviousQuestion" />
+        <input type="hidden" value="true" name="Update" />
+        <div class="col-md-8. col-lg-offset-3 top_buffer">
+            <div class="form-group">
+                <textarea class="form-control top_buffer" id="Question" name="Question" rows="3" placeholder="Введите вопрос"> @ViewBag.Question</textarea>
+                <label for="QuestionImg">Добавьте изображение</label>
+                <input type="file" class="form-control-file bot_buffer2" id="QuestionImg" name="QuestionImg" />
+            </div>
+            @for (int i = 0; i < 5; i++)
+            {
+                <div class="input-group top_buffer ">
+                    <span class="input-group-addon">
+                        Ответ @(i + 1)
+                    </span>
+                    <span class="input-group-addon">
+                        Верно?
+                    </span>
+                    @if (i < Model.Count())
+                    {
+                        if (Model[i].Correct)
+                        {
+                            <span class="input-group-addon">
+                                <input type="checkbox" value="true" name=@String.Concat("checkbox", i) checked>
+                            </span>
+                            <input type="text" class="form-control" name=answer value="@Model[i].Name">
+                        }
+                        else
+                        {
+                            <span class="input-group-addon">
+                                <input type="checkbox" value="true" name=@String.Concat("checkbox", i)>
+                            </span>
+                            <input type="text" class="form-control" name=answer value="@Model[i].Name">
+                        }
+                    }
+
+                    else
+                    {
+                        <span class="input-group-addon">
+                            <input type="checkbox" value="true" name=@String.Concat("checkbox", i)>
+                        </span>
+                        <input type="text" class="form-control" name=answer />
+                    }
+
+
+                </div>
+            }
+        </div>
+        <input type="submit" class="btn btn-primary top_buffer1 col-md-offset-7" name="button" value="Сохранить вопрос" />
+        <input type="submit" class="btn btn-default top_buffer1 " name="button" value="Удалить вопрос" />
+    }
+
+}
+

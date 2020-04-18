@@ -1,0 +1,10 @@
+﻿@using diploma.Models
+@model List<IGrouping<DateTime, UserAnswer>>
+
+<ul class="pagination" style="margin-top:0px;">
+    @foreach (var item in Model)
+    {
+    <li>@Ajax.ActionLink(item.Select(p=>p.Date).FirstOrDefault().ToString(), "TestReport3", new { LessonId = item.Select(p=>p.Answer.Question.Lesson.Id).FirstOrDefault(), Date= item.Select(p => p.Date).FirstOrDefault()}, new AjaxOptions { UpdateTargetId = "TestReport3" })</li>
+    }    
+</ul>
+<div id="TestReport3" class="text-center"></div>

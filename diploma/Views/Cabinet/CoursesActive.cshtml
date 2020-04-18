@@ -1,0 +1,25 @@
+﻿@using diploma.Models
+@model List<UserCourses>
+<div class="container col-md-8">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-md-11">Название теста</th>
+                <th class="col-md-1">Подробности</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("CourseProfile","Home", new {CourseId=item.Course.Id})">@item.Course.Name</a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("TestReport1","Cabinet", new {CourseId=item.Course.Id})"><span class="glyphicon glyphicon-option-horizontal"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

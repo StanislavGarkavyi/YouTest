@@ -1,0 +1,66 @@
+﻿<style>
+    .top20 {
+        margin-top: 20px;
+    }
+</style>
+@using diploma.Models
+@model ApplicationUser
+<div class="row top20">
+    @if (Model.Img == null)
+    {
+        <div class="col-md-2 text-center">
+            <img src="~/img/defaultlogo.jpg" class="img-circle" style="width:150px; height:150px;">
+            <h6>@Model.Email</h6>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-2 text-center">
+            <img src="@Model.Img" class="img-circle" style="width:150px; height:150px;">
+            <h6>@Model.Email</h6>
+        </div>
+    }
+
+    <div class="col-md-9 col-md-offset-1 top20">
+        <ul id="cabinet_menu" class="nav nav-tabs">
+            <li id="list1" onclick="CabinetMenu(this)" class="active"> @Ajax.ActionLink("Курсы", "CoursesActive", new { active = true }, new AjaxOptions { UpdateTargetId = "panel" })</li>
+            <li id="list2" onclick="CabinetMenu(this)"> @Ajax.ActionLink("Законченные курсы", "CoursesActive", new { active = false }, new AjaxOptions { UpdateTargetId = "panel" })</li>
+            <li id="list3" onclick="CabinetMenu(this)">@Ajax.ActionLink("Мои курсы", "MyCourses", new AjaxOptions { UpdateTargetId = "panel" })</li>
+        </ul>
+        <div class="top20" id="panel">
+            <div class="container col-md-8">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-md-11">Название теста</th>
+                            <th class="col-md-1">Подробности</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.UserCourses.Where(p => p.CourseEnd == false))
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("CourseProfile","Home", new {CourseId=item.Course.Id})">@item.Course.Name</a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("TestReport1","Cabinet", new {CourseId=item.Course.Id})"><span class="glyphicon glyphicon-option-horizontal"></span></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="text-right"><div class="btn btn-default">@Html.ActionLink( "Создать курс", "Index", "CourseCreate")</div></div>
+<script>
+    function CabinetMenu(e) {        
+        for (let i = 0; i < e.parentElement.childElementCount; i++) {
+            e.parentElement.children[i].classList.remove("active");
+        }
+        e.classList.add("active");
+    }
+</script>

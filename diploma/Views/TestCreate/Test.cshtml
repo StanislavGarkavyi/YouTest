@@ -1,0 +1,29 @@
+﻿@using (Ajax.BeginForm("Question", "TestCreate", new AjaxOptions { UpdateTargetId = "menu" }))
+{
+    <input type="hidden" value="@ViewBag.LessonId" name="LessonId" />
+    <div class="row" style="margin-top:5vh">
+        <div class="col-md-6">
+            <h1>Тест: @ViewBag.LessonName</h1>
+        </div>
+        <form class="form-inline" >
+            <input type="number" class="form-control col-md-3 col-md-offset-1" style="margin-top:5vh" name="QuestionCount" placeholder="Введите количество вопросов" />
+            <input type="submit" class="btn btn-primary" value="Ok" style="margin-top:5vh" />
+        </form>
+    </div>
+}
+    <div class="row" id="menu">
+        <div class=" col-md-2 top_buffer">
+            <ul class="nav nav-pills nav-stacked">
+                @for (int i = 0; i < ViewBag.QuestionCount; i++)
+                {
+                    <li>
+
+                        @Ajax.ActionLink("Вопрос " + (i + 1).ToString(), "AddQuestion", new { QuestionCount = @i, LessonId = @ViewBag.LessonId }, new AjaxOptions { UpdateTargetId = "Question" })
+                    </li>
+
+                }
+
+            </ul>
+        </div>
+        <div id="Question"></div>
+    </div>

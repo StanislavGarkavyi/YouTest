@@ -1,0 +1,29 @@
+﻿@using diploma.Models
+@model Course
+<div class="row" style="margin-top:5vh;">
+    <div class="col-md-3">
+        <img src="@Model.CourseImg" class="img-circle" style="width:150px; height:150px;">
+        <h1>@Model.Name</h1>        
+    </div>
+    <div class="col-md-6 ">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Название Урока</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Lessons.ToList())
+                {
+                    <tr>
+                        <td >@item.Name</td>
+                        <td class="text-right"> @Html.ActionLink("Добавить тест", "Test", "TestCreate", new { LessonId = item.Id }, null)</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

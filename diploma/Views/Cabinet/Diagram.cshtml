@@ -1,0 +1,69 @@
+﻿@using diploma.Models;
+@model List<DiagramViewModel>
+<html>
+<head>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+    <script type="text/javascript">
+        
+		FusionCharts.ready(function(){
+			var chartObj = new FusionCharts({
+    type: 'scrollColumn2d',
+    renderAt: 'chart-container',
+    width: '1000',
+    height: '250',
+    dataFormat: 'json',
+    dataSource: {
+        "chart": {
+            "theme": "fusion",
+            "caption": "Course",
+            "subcaption": "",
+            "xaxisname": "Lesson",
+            "yaxisname": "Point",
+            "showvalues": "0",
+            "numberprefix": "",
+            "numVisiblePlot": "10",
+            "scrollheight": "10",
+            "flatScrollBars": "1",
+            "scrollShowButtons": "0",
+            "scrollColor": "#cccccc",
+            "showHoverEffect": "3"
+        },
+        "categories": [{
+
+
+
+            "category":
+                <text> [
+                
+              @ViewBag.label
+                
+               
+                ]</text>
+
+
+
+
+        }],
+        
+        "dataset": [{
+            "data": [
+                <text> @ViewBag.val</text>
+                ]
+        }]
+    }
+});
+			chartObj.render();
+		});
+            
+    </script>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <style type="text/css">
+        g[class$='creditgroup'] {
+            display: none !important;
+        }
+    </style>
+</body>
+</html>

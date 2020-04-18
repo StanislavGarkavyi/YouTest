@@ -1,0 +1,25 @@
+﻿<style>
+    .top_buffer1 {
+        margin-top: 30px;
+    }
+
+    .bot_buffer2 {
+        margin-bottom: 50px;
+    }
+</style>
+<form method="post" enctype="multipart/form-data">
+    <div class="col-md-12 text-center bot_buffer2 ">
+        <h1> Создайте свою категорию тестов</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-4 top_buffer1 ">
+            <h2>Придумайте название</h2>
+            <input type="text" class="form-control bot_buffer2 col-md-4" id="category" name="category">
+        </div>
+        <div class="col-md-offset-0 col-md-6 top_buffer1 ">
+            <h2>Добавьте изображение</h2>
+            <input type="file" class="form-control-file col-md-10" id="CatImg" name="CatImg">
+        </div>
+    </div>
+    <input class="btn btn-primary col-md-offset-10" type="submit" value="Сохранить изменения">
+</form>

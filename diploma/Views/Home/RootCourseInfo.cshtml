@@ -1,0 +1,63 @@
+﻿@using diploma.Models
+@model Course
+
+
+
+
+
+<div class="row text-center top_buffer1"><h2>Курс: @Model.Name</h2></div>
+
+
+<div class="row">
+    <input type="hidden" value="@ViewBag.TestId" name="TestId" />
+    <div class="col-md-2">
+        <img src="@Url.Content(Model.CourseImg)" alt="..." class="img-circle" style='width:140px; height:140px;'>
+
+    </div>
+    <div class="col-md-8">
+
+        <h4 class="col-md-8"><strong>Описание:</strong><br><br><b class="descr">@Model.Description</b></h4>
+        <button class="btn btn-default col-md-offset-8 top_buffer1"> @Html.ActionLink("Редактировать курс", "", "", new { TestId = ViewBag.TestId, QuestioCount = ViewBag.QuestioCount }, null)</button>
+        <div class="col-md-12" id="Result"></div>
+    </div>
+    <div class="col-md-2">
+        <div class="row top_buffer1">
+            <div class="col-md-6">
+                <img src="~/img/Sign-question-icon.png" alt="..." style='width:90px; height:90px;'>
+            </div>
+            <div class="col-md-offset-2 col-md-4 top_buffer1">
+              @Ajax.ActionLink("Количество Уроков " + @Model.Lessons.Count + " шт", "RootList", new { CourseId = Model.Id, function = true }, new AjaxOptions { UpdateTargetId = "Result" })
+            </div>
+        </div>
+        <div class="row top_buffer1">
+            <div class="col-md-6">
+                <img src="~/img/Без названия.png" alt="..." style='width:100px; height:100px;'>
+            </div>
+            <div class="col-md-offset-2 col-md-4 top_buffer1">
+               @Ajax.ActionLink( "Учащихся "+ @Model.UserCourses.Select(p=>p.User.Id).Distinct().Count()+ " чел", "RootList", new  {CourseId=Model.Id, function = false },  new AjaxOptions { UpdateTargetId="Result"})
+            </div>
+        </div>
+
+    </div>
+</div>
+<h5 class="top_buffer1">Создал: @ViewBag.Creator</h5>
+
+<style>
+    .top_buffer1 {
+        margin-top: 30px;
+    }
+
+    .bot_buffer2 {
+        margin-bottom: 10px;
+    }
+
+    .bot_buffer1 {
+        margin-top: 30px;
+        margin-bottom: 50px;
+    }
+    .descr {
+        font-size:13px;
+        font-weight:100;
+        opacity:.8;
+    }
+</style>

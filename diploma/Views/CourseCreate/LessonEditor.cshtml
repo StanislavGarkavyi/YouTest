@@ -1,0 +1,61 @@
+﻿@using diploma.Models
+@model Course
+<form method="post" enctype="multipart/form-data" action="/CourseCreate/LessonEditor">
+    <input type="hidden" name="ID" value="@Model.Id" />
+    <div class="row" style="margin-top:2vh;">
+        <div class="col-md-6" style="font-size:3vh;">@Model.Name</div>
+        <div i class="input-group col-md-3 col-md-offset-9">
+            @if (Model.Lessons.Count >= Convert.ToInt32(ViewBag.LessonCount))
+            { <input type="number" class="form-control" name="number" value="@Model.Lessons.Count">}
+            else
+            {<input type="number" class="form-control" name="number" value="@ViewBag.LessonCount"> }
+            
+
+
+            <span class="input-group-btn">
+                <input type="submit" name="submit" class="btn btn-default" value="Ок" />
+            </span>
+        </div>
+    </div>
+    @if (ViewBag.save== "Ok") {<div class="alert alert-success" style="width:100%; margin-top:10px">Изменения успешно сохранены</div> }    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Название Урока</th>
+                <th title="Загружайте файл только если нужно внести изменения в сам файл, либо если не отображается путь к файлу в правой колонке!">.html файл урока</th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Convert.ToInt32(ViewBag.LessonCount); i++)
+            {
+                if (Model.Lessons.Count <= i)
+                {
+                    <tr>
+                        <td><input id="lessonname" name="lessonname" type="text" style=" width:100%"  /></td>
+                        <td><input id="lessonfile" name="lessonfile" type="file" accept=".zip"  /></td>
+                        <td></td>
+                        <td> 
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td><input id="lessonname" name="lessonname" type="text" style=" width:100%" value="@Model.Lessons[i].Name" /><input type="hidden" name="lessonid"value="@Model.Lessons[i].Id"/></td>
+                        <td><input id="lessonfile" name="lessonfile" type="file" accept=".zip" title="@Model.Lessons[i].File" /></td>
+                        <td>@Model.Lessons[i].File</td>
+                        <td>
+                           <a target="_blank" href="@Url.Action("Test","TestCreate", new { LessonId=Model.Lessons[i].Id})" class="btn btn-default"> Редактировать тестовое задание</a>
+                        </td>
+                    </tr>
+                }
+
+            }
+
+        </tbody>
+    </table>
+    <input type="submit" class="btn  btn-success col-md-offset-9" name="submit" value="Сохранить изменения" />
+</form>

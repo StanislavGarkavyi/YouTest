@@ -1,0 +1,16 @@
+﻿<input type="hidden" value="@ViewBag.LessonId" name="LessonId" />
+<input type="hidden" value="@ViewBag.QuestionCount" name="QuestionCount" />
+<div class=" col-md-2 top_buffer">
+    <ul class="nav nav-pills nav-stacked">
+        @for (int i = 0; i < ViewBag.QuestionCount; i++)
+        {
+            <li>
+
+                @Ajax.ActionLink("Вопрос " + (i + 1).ToString(), "AddQuestion", new { QuestionCount = @i, LessonId = @ViewBag.LessonId }, new AjaxOptions { UpdateTargetId = "Question" })
+            </li>
+
+        }
+
+    </ul>
+</div>
+<div id="Question"></div>

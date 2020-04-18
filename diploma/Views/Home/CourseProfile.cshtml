@@ -1,0 +1,80 @@
+﻿<style>
+    .top_buffer1 {
+        margin-top: 30px;
+    }
+
+    .bot_buffer2 {
+        margin-bottom: 10px;
+    }
+
+    .bot_buffer1 {
+        margin-top: 30px;
+        margin-bottom: 50px;
+    }
+</style>
+
+
+@using diploma.Models
+@model Course
+<div class="row text-center top_buffer1"><h2>Курс: @Model.Name</h2></div> 
+
+
+<div class="row">
+    <input type="hidden" value="@ViewBag.TestId" name="TestId" />
+    <div class="col-md-2">
+        <img src="@Url.Content(Model.CourseImg)" alt="..." class="img-circle" style='width:140px; height:140px;'>
+
+    </div>
+    <div class="col-md-8">
+
+        <h4 class="col-md-8"><strong>Описание:</strong><br><br>@Model.Description</h4>
+
+
+
+        <button class="btn btn-danger col-md-offset-6 top_buffer1" style="color:white"> @Html.ActionLink("Закончить Курс", "CourseSE", "Home", new { lessonid = Model.Lessons.FirstOrDefault().Id, end = true }, new { @class = "my-class" })</button>
+        <button class="btn btn-success  top_buffer1" style="color:white"> @Html.ActionLink("Начать Курс", "CourseSE", "Home", new { lessonid = Model.Lessons.FirstOrDefault().Id, end = false }, new { @class = "my-class" })</button>
+
+
+
+
+
+
+    </div>
+    <div class="col-md-2">
+        <div class="row top_buffer1">
+            <div class="col-md-6">
+                <img src="~/img/Sign-question-icon.png" alt="..." style='width:90px; height:90px;'>
+            </div>
+            <div class="col-md-offset-2 col-md-4 top_buffer1">
+                Количество Уроков @Model.Lessons.Count шт
+            </div>
+        </div>
+        <div class="row top_buffer1">
+            <div class="col-md-6">
+                <img src="~/img/Без названия.png" alt="..." style='width:100px; height:100px;'>
+            </div>
+            <div class="col-md-offset-2 col-md-4 top_buffer1">
+                Учашихся @Model.UserCourses.Where(p=>p.Course==Model).Distinct().Count() чел
+            </div>
+        </div>
+
+    </div>
+</div>
+<h5 class="top_buffer1">Создал: @ViewBag.Creator</h5>
+<style>
+    a.my-class {
+        color: white;
+    }
+
+        a.my-class:active {
+            color: white;
+        }
+
+        a.my-class:link {
+            color: white;
+        }
+
+        a.my-class:visited {
+            color: white;
+        }
+</style>

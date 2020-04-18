@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 
 namespace diploma.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

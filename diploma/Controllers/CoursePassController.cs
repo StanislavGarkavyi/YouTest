@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace diploma.Controllers
 {
+    [Authorize]
     public class CoursePassController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

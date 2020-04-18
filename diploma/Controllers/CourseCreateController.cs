@@ -11,6 +11,7 @@ using System.IO.Compression;
 
 namespace diploma.Controllers
 {
+    [Authorize]
     public class CourseCreateController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

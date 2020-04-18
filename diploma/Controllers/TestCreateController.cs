@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace diploma.Controllers
 {
+    [Authorize]
     public class TestCreateController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

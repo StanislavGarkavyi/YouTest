@@ -24,15 +24,11 @@ namespace diploma.Controllers
             var model = db.Courses.Where(p => p.CretorId == user).ToList();
             return PartialView(model);
         }
-        public ActionResult CoursesActive(bool active)
+        public ActionResult CoursesActive(bool active, bool confirmed)
         {
             List<UserCourses> model = new List<UserCourses>();
-            var user = db.Users.Find(User.Identity.GetUserId());
-            if (active)
-            {  model = db.UserCourses.Where(p => p.User.Id == user.Id& p.CourseEnd==false).ToList(); }
-            else
-            {  model = db.UserCourses.Where(p => p.User.Id == user.Id & p.CourseEnd == true).ToList(); }
-            
+            var user = db.Users.Find(User.Identity.GetUserId());                
+            model = db.UserCourses.Where(p => p.User.Id == user.Id & p.CourseEnd == !active & p.Confirmed==confirmed).ToList(); 
             return PartialView(model);
         }
         public ActionResult TestReport1(int CourseId, string RedirectUser)

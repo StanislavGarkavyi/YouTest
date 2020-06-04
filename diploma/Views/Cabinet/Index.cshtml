@@ -34,9 +34,11 @@
 
     <div class="col-md-9 col-md-offset-1 top20">
         <ul id="cabinet_menu" class="nav nav-tabs">
-            <li id="list1" onclick="CabinetMenu(this)" class="active"> @Ajax.ActionLink("Курсы", "CoursesActive", new { active = true }, new AjaxOptions { UpdateTargetId = "panel" })</li>
-            <li id="list2" onclick="CabinetMenu(this)"> @Ajax.ActionLink("Законченные курсы", "CoursesActive", new { active = false }, new AjaxOptions { UpdateTargetId = "panel" })</li>
+            <li id="list1" onclick="CabinetMenu(this)" class="active"> @Ajax.ActionLink("Курсы", "CoursesActive", new { active = true, confirmed = true }, new AjaxOptions { UpdateTargetId = "panel" })</li>
+            <li id="list4" onclick="CabinetMenu(this)"> @Ajax.ActionLink("Ожидают подтверждения", "CoursesActive", new { active = true, confirmed = false }, new AjaxOptions { UpdateTargetId = "panel" })</li>
+            <li id="list2" onclick="CabinetMenu(this)"> @Ajax.ActionLink("Законченные курсы", "CoursesActive", new { active = false, confirmed = true }, new AjaxOptions { UpdateTargetId = "panel" })</li>
             <li id="list3" onclick="CabinetMenu(this)">@Ajax.ActionLink("Мои курсы", "MyCourses", new AjaxOptions { UpdateTargetId = "panel" })</li>
+
         </ul>
         <div class="top20" id="panel">
             <div class="container col-md-8">
@@ -48,7 +50,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.UserCourses.Where(p => p.CourseEnd == false))
+                        @foreach (var item in Model.UserCourses.Where(p => p.CourseEnd == false & p.Confirmed==true))
                         {
                             <tr>
                                 <td>

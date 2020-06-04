@@ -75,20 +75,28 @@ namespace diploma.Controllers
             var test = db.UserCourses.Where(p => p.Course.Id == Course.Id & p.User.Id == user.Id).FirstOrDefault();
             if (test == null)
             {
-                UserCourses c = new UserCourses() { Course = Course, User = user, CourseEnd = end };
+                UserCourses c = new UserCourses() { Course = Course, User = user, CourseEnd = end, Confirmed=false };
                 db.UserCourses.Add(c);
                 db.SaveChanges();
             }
             else
             {test.CourseEnd = end; db.SaveChanges();}
-            if (!end)
+            if (test.Confirmed) 
             {
-                return RedirectToAction("Index", "CoursePass", new { lessonid = Course.Lessons.FirstOrDefault().Id });
+                if (!end)
+                {
+                    return RedirectToAction("Index", "CoursePass", new { lessonid = Course.Lessons.FirstOrDefault().Id });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Cabinet");
+                }
             }
-            else
+            else 
             {
                 return RedirectToAction("Index", "Cabinet");
             }
+            
             
         }
         public ActionResult UserResultRedirect(string user, int CourseId)

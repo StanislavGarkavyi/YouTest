@@ -48,7 +48,7 @@
                     {
                         for (int j = 0; j < Model[i].Courses.Count; j++)
                         {
-                            if (Model[i].Courses[j].Name.Contains(ViewBag.Search) && Model[i].Courses[j].Cathegory.Name == ViewBag.Cathegory)
+                            if (Model[i].Courses[j].Name.Contains(ViewBag.Search) && Model[i].Courses[j].Cathegory.Name == ViewBag.Cathegory && Model[i].Courses[j].Confirmed)
                             {
                                 counter++;
                                 <div class="col-md-4  panel panel-default   top_buffer1">
@@ -90,7 +90,7 @@
                     {
                         for (int j = 0; j < Model[i].Courses.Count; j++)
                         {
-                            if (Model[i].Courses[j].Description.Contains(ViewBag.Search) && Model[i].Courses[j].Cathegory.Name == ViewBag.Cathegory)
+                            if (Model[i].Courses[j].Description.Contains(ViewBag.Search) && Model[i].Courses[j].Cathegory.Name == ViewBag.Cathegory && Model[i].Courses[j].Confirmed)
                             {
                                 counter++;
                                 <div class="col-md-4  panel panel-default  top_buffer1">
@@ -137,7 +137,7 @@
                     {
                         for (int j = 0; j < Model[i].Courses.Count; j++)
                         {
-                            if (Model[i].Courses[j].Name.Contains(ViewBag.Search))
+                            if (Model[i].Courses[j].Name.Contains(ViewBag.Search) && Model[i].Courses[j].Confirmed)
                             {
                                 counter++;
                                 <div class="col-md-4  panel panel-default top_buffer1">
@@ -179,7 +179,7 @@
                     {
                         for (int j = 0; j < Model[i].Courses.Count; j++)
                         {
-                            if (Model[i].Courses[j].Description.Contains(ViewBag.Search))
+                            if (Model[i].Courses[j].Description.Contains(ViewBag.Search) && Model[i].Courses[j].Confirmed)
                             {
                                 counter++;
                                 <div class="col-md-4  panel panel-default  top_buffer1">
@@ -223,7 +223,7 @@
         }
         else
         {
-            if (Model.Count() <= 0)
+            if (Model.Where(p=>p.Courses.Any(c=>c.Confirmed)).Count()<=0)
             {
                 <div class="col-md-12 text-center">
                     <h2>Курсов не найдено</h2>
@@ -234,6 +234,8 @@
             {
                 for (int j = 0; j < Model[i].Courses.Count; j++)
                 {
+                    if (Model[i].Courses[j].Confirmed)
+                    {
                     <div class="col-md-4  panel panel-default top_buffer1">
                         <div class="panel-body">
                             <div class="text-center">
@@ -248,7 +250,7 @@
                             @if (ViewBag.userid == Model[i].Courses[j].CretorId)
                             {
                                 <div class="btn btn-default  col-md-10 "> @Html.ActionLink("Пройти", "CourseProfile", new { CourseId = Model[i].Courses[j].Id })</div>
-                                <div class="btn btn-default  col-md-2 "> @Html.ActionLink("Ред", "Index", "CourseCreate",  new { CourseId = Model[i].Courses[j].Id.ToString()}, new { })</div>
+                                <div class="btn btn-default  col-md-2 "> @Html.ActionLink("Ред", "Index", "CourseCreate", new { CourseId = Model[i].Courses[j].Id.ToString() }, new { })</div>
                             }
                             else
                             {
@@ -256,6 +258,7 @@
                             }
                         </div>
                     </div>
+                    }
                 }
             }
         }

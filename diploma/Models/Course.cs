@@ -16,6 +16,7 @@ namespace diploma.Models
         public string CourseImg { get; set; }
         public string CretorId { get; set; }
         public double Price { get; set; }
+        public bool Confirmed { get; set; }
         public virtual Cathegory Cathegory { get; set; }
         public virtual List<UserCourses> UserCourses { get; set; }
         public Course()

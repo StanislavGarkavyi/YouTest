@@ -221,6 +221,7 @@
     <Compile Include="Controllers\CoursePassController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TestCreateController.cs" />
     <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -361,6 +362,7 @@
     <Content Include="Views\Cabinet\Diagram.cshtml" />
     <Content Include="Views\Cabinet\putMoney.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,23 @@
+﻿
+@using diploma.Controllers
+@model List<TestViewModel>
+<table class="table table-striped">
+    <tr>
+        <td>Автор</td>
+        <td>Название курса</td>
+        <td>Выручка</td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Creator</td>           
+            <td>@Html.ActionLink(@item.Name, "CourseProfile", "Home", new { Id = item.Id })</td>
+            <td>@item.Sum</td>
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink("ASC", "Index", new { desc = false }, new { @class = "btn btn-primary" })
+@Html.ActionLink("DESC", "Index", new { desc = true }, new { @class = "btn btn-primary" })

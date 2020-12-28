@@ -47,7 +47,7 @@ namespace diploma.Controllers
                 TestCreateController control = new TestCreateController();
                 if (id == "")
                 {
-                    Course c = new Course { Name = model.Name, Description = model.Description, Cathegory = cat, CretorId = userid };
+                    Course c = new Course { Name = model.Name, Description = model.Description, Cathegory = cat, CretorId = userid, Confirmed=false, Price= model.Price };
                     db.Courses.Add(c);
                     db.SaveChanges();
                     var param = db.Courses.OrderByDescending(p => p.Id).FirstOrDefault();

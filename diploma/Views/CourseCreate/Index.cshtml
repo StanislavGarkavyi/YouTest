@@ -1,61 +1,69 @@
 ﻿@model diploma.Models.CourseCreateViewModel
-<div class="anket">
+    <div class="anket">
 
-    @using (Html.BeginForm("Index", "CourseCreate", FormMethod.Post, new { @class = "form-vertical", role = "form", enctype = "multipart/form-data" }))
-    {
-        <input type="hidden" value="@ViewBag.Id" id="id" name="id" />
-        <div class="form-group">
-            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-            <div class="col-md-12">
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Value = ViewBag.Name })
-                @Html.ValidationMessageFor(m => m.Name)
+        @using (Html.BeginForm("Index", "CourseCreate", FormMethod.Post, new { @class = "form-vertical", role = "form", enctype = "multipart/form-data" }))
+        {
+            <input type="hidden" value="@ViewBag.Id" id="id" name="id" />
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Value = ViewBag.Name })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
-            <div class="col-md-12">
-                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @Value = ViewBag.Description, @placeholder = ViewBag.Description })
-                @Html.ValidationMessageFor(m => m.Description)
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @Value = ViewBag.Description, @placeholder = ViewBag.Description })
+                    @Html.ValidationMessageFor(m => m.Description)
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Cathegory, new { @class = "col-md-2 control-label" })
-            <div class="col-md-12">
-                @Html.DropDownListFor(m => m.Cathegory, ViewBag.Cathegories as SelectList, "", new { @class = "drop form-control", @Value = ViewBag.Cathegory })
-                @Html.ValidationMessageFor(m => m.Cathegory)
+            <div class="form-group">
+                @Html.LabelFor(m => m.Cathegory, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.DropDownListFor(m => m.Cathegory, ViewBag.Cathegories as SelectList, "", new { @class = "drop form-control", @Value = ViewBag.Cathegory })
+                    @Html.ValidationMessageFor(m => m.Cathegory)
+                </div>
             </div>
-        </div>
-        @Html.ActionLink("Или создайте свою...", "CathegoryCreate", "CourseCreate", new { @class = "link" });
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.img, new { @class = "col-md-2 control-label" })
-            <div class="col-md-12">
-                @Html.TextBoxFor(m => m.img, new { type = "file" })
-                @Html.ValidationMessageFor(m => m.img)
+            @Html.ActionLink("Или создайте свою...", "CathegoryCreate", "CourseCreate", new { @class = "link" });
+            <div class="form-group">
+                @Html.LabelFor(m => m.Price, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.Price, new { @type="number" })
+                    @Html.ValidationMessageFor(m => m.Price)
+                </div>
             </div>
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.img, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.img, new { type = "file" })
+                    @Html.ValidationMessageFor(m => m.img)
+                </div>
+            </div>
 
-       
-       
 
 
-        @*<div class="col-md-6 col-md-offset-1" style="margin-top:2vh;">
+
+
+
+
+            @*<div class="col-md-6 col-md-offset-1" style="margin-top:2vh;">
                 <strong>
                     Добавить аватар курса
                 </strong>
                 <input type="file" name="img" title="Добавить изображение" />
             </div>*@
 
-        <div class="form-group">
-            <div class="col-md-offset-10" style="margin-top:100px;">
-                <input type="submit" class="btn btn-default" value="Создать курс" />
+            <div class="form-group">
+                <div class="col-md-offset-10" style="margin-top:100px;">
+                    <input type="submit" class="btn btn-default" value="Создать курс" />
+                </div>
             </div>
-        </div>
 
 
-    }
+        }
 
-</div>
+    </div>
 <style>
     .link{color:black; margin-left:25%;}
     .anket{margin-left:30%;}

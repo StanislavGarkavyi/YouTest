@@ -1,0 +1,23 @@
+<p>Вооружившись информацией, полученной из прошлых тем, определим простейший проект, который будет реализовать CRUD интерфейс, применяя маршрутизацию. Для этого возьмем базовый проект:</p>
+<img src="../../CoursesFiles/4/30/img/1.jpg" style="width: 25%; margin-left: 30%">
+<p>Для обработки запросов будет использоваться контроллер ProductController из папки Controllers:</p>
+<br><img src="../../CoursesFiles/4/30/img/2.jpg"><br><img src="../../CoursesFiles/4/30/img/3.jpg"><br><img src="../../CoursesFiles/4/30/img/4.jpg"><br><img src="../../CoursesFiles/4/30/img/5.jpg"><br>
+<p>В качестве модели данных этот контроллер использует класс Product:</p>
+<img src="../../CoursesFiles/4/30/img/6.jpg">
+<p>А для взаимодействия контроллер использует контекст данных ApplicationContext:</p>
+<img src="../../CoursesFiles/4/30/img/7.jpg">
+<p>В классе Startup предусмотрен фолбек на приложение Angular:</p>
+<br><img src="../../CoursesFiles/4/30/img/8.jpg"><br><img src="../../CoursesFiles/4/30/img/9.jpg"><br><img src="../../CoursesFiles/4/30/img/10.jpg"><br>
+<p>Для загрузки приложения Angular будет использоваться статический файл index.html из папки wwwroot:</p>
+<img src="../../CoursesFiles/4/30/img/11.jpg">
+<p>В папке ClientApp/app в файле product.ts определен класс, представляющий модель данных:</p>
+<img src="../../CoursesFiles/4/30/img/12.jpg">
+<p>В файле data.service.ts определен сервис для взаимодействия с сервером:</p>
+<br><img src="../../CoursesFiles/4/30/img/13.jpg"><br><img src="../../CoursesFiles/4/30/img/14.jpg"><br>
+<p>В файле app.component.ts определен главный компонент приложения:</p>
+<img src="../../CoursesFiles/4/30/img/15.jpg">
+<p>А в файле app.component.html определено представление этого компонента:</p>
+<img src="../../CoursesFiles/4/30/img/16.jpg">
+<p>Содержимое файла app.module.ts пока не имеет значения, поскольку в дальнейшем мы его все равно изменим. Теперь перейдем к добавлению компонентов, которые будут выполнять отдельные функции интерфейса CRUD.</p>
+<style>p{text-indent: 25px;}img{width: 100%}
+</style>

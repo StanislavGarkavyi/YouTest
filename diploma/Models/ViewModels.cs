@@ -20,7 +20,10 @@ namespace diploma.Models
         public string Description { get; set; }
         [Required]
         [Display(Name = "Категория курса")]
-        public string Cathegory { get; set; }       
+        public string Cathegory { get; set; }
+        [Required]
+        [Display(Name = "Цена курса")]
+        public int Price { get; set; }
         [Required]
         [Display(Name = "Логотип курса")]
         public HttpPostedFileBase img { get; set; }

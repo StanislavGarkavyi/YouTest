@@ -1,28 +1,56 @@
-﻿@using diploma.Models 
-@model List<UserCourses>
-    <table class="table table-striped">
+﻿@using diploma.Controllers
+@model AdminViewModel
+<h5 class="header">Не подтвержденные заявки на регистрация курса</h5>
+<table class="table table-striped">    
+    <tr>
+        <td>Курс</td>
+        <td>Категория</td>
+        <td>Стоимость</td>
+        <td></td>
+    </tr>
+    @if (Model.Courses.Count == 0)
+    {
+        <tr><td colspan="4" align="center"><b>Нет заявок</b></td></tr>
+    }
+    @foreach (var item in Model.Courses)
+    {
         <tr>
-            <td colspan="4" align="center">Не подтвержденные заяки</td>
+            <td>@item.Name</td>
+            <td>@item.Cathegory.Name</td>
+            <td>@item.Price</td>
+            <td>@Html.ActionLink("Подтвердить", "ConfirmCourse", new { Course = item.Id }, new { @class = "btn btn-default" })</td>
         </tr>
-        <tr>
-            <td>Курс</td>
-            <td>Пользователь</td>
-            <td>Стоимость</td>  
-            <td></td>
-        </tr>
-        @if (Model.Count == 0) 
-        {
-            <tr><td colspan="4" align="center"><b>Нет заявок</b></td></tr>
-        }
-        @foreach (var item in Model) 
-        {
-            <tr>
-                <td>@item.Course.Name</td>
-                <td>@item.User.UserName</td>
-                <td>@item.Course.Price</td>
-                <td><button type="button" class="btn btn-default">Подтвердить</button></td>
-            </tr>
-        }
-        
-    </table>
+    }
 
+</table>
+<h5 class="header">Не подтвержденные заявки на покупку курса</h5>
+<table class="table table-striped">
+    <tr>
+        <td>Курс</td>
+        <td>Пользователь</td>
+        <td>Стоимость</td>
+        <td></td>
+    </tr>
+    @if (Model.UserCourses.Count == 0)
+    {
+        <tr><td colspan="4" align="center"><b>Нет заявок</b></td></tr>
+    }
+    @foreach (var item in Model.UserCourses)
+    {
+        <tr>
+            <td>@item.Course.Name</td>
+            <td>@item.User.UserName</td>
+            <td>@item.Course.Price</td>
+            <td>@Html.ActionLink("Подтвердить", "ConfirmUserCourse", new { UserCourse = item.Id }, new { @class = "btn btn-default" })</td>
+        </tr>
+    }
+
+</table>
+
+<style>
+    .header {
+        text-align: center;
+        font-size: 25px;
+        margin: 50px 0px;
+    }
+</style>
